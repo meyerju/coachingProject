@@ -37,7 +37,6 @@ export default function App () {
         <FlatList
           data={movies}
           renderItem={movieItem}
-          keyExtractor={({id}) => id}
         />
     </View>
   )
