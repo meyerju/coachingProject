@@ -1,38 +1,34 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, FlatList } from 'react-native';
 
+import { fetchMovies } from './services/movies';
+
 interface MovieItem {
   title: string;
   id: string
 } 
 
 export default function App () {
-  const [state, setState] = useState({movies:null});
+  const [movies, setState] = useState(null);
+  const [count, setCount] = useState(0);
   
+  async function fetchData(){
+    const movies = await fetchMovies();
+    setState(movies);
+  }
+
   useEffect(() => {
-    fetch('https://facebook.github.io/react-native/movies.json')
-      .then((response) => response.json())
-      .then((responseJson) => {
+     fetchData();
+  }, []);
 
-        setState({
-          movies: responseJson.movies,
-        });
-      })
-      .catch((error) =>{
-        console.error(error);
-      });
-
-    return;
-  });
-  
   return (
     <View style={styles.container}>
-      <View style={styles.title_container}>
-        <Text style={styles.title}>The best movies</Text>
-      </View>
+        <View style={styles.title_container}>
+          <Text style={styles.title}>The best {count} movies</Text>
+        </View>
     
         <FlatList
-          data={state.movies}
+          data={movies}
           renderItem={({item}: {item: MovieItem}) => <Text style={styles.item}>{item.title}</Text>}
           keyExtractor={({id}) => id}
         />
@@ -56,7 +52,6 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 25,
     color: "white"    
-
   },
   item: {
     padding: 10,
