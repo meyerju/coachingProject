@@ -8,6 +8,12 @@ interface MovieItem {
   id: string
 } 
 
+export function movieItem ({item}: {item: MovieItem}) {
+  return ( 
+    <Text style={styles.item}>{item.title}</Text>
+  )
+};
+
 export default function App () {
   const [movies, setState] = useState(null);
   const [count, setCount] = useState(0);
@@ -15,6 +21,7 @@ export default function App () {
   async function fetchData(){
     const movies = await fetchMovies();
     setState(movies);
+    setCount(movies.length);
   }
 
   useEffect(() => {
@@ -29,7 +36,7 @@ export default function App () {
     
         <FlatList
           data={movies}
-          renderItem={({item}: {item: MovieItem}) => <Text style={styles.item}>{item.title}</Text>}
+          renderItem={movieItem}
           keyExtractor={({id}) => id}
         />
     </View>
