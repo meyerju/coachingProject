@@ -1,6 +1,11 @@
 import React from 'react';
 import { StyleSheet, Text, View, FlatList } from 'react-native';
 
+interface MovieItem {
+  title: string;
+  id: number
+} 
+
 export default class App extends React.Component {
   state= {
     movies: null
@@ -27,13 +32,12 @@ export default class App extends React.Component {
           <Text style={styles.title}>The best movies</Text>
         </View>
       
-      <FlatList
-      style={styles.movies}
-          data={this.state.movies}
-          renderItem={({item}: any) => <Text style={styles.item}>{item.title}</Text>}
-          keyExtractor={({id}, index) => id}
-        />
-    </View>
+          <FlatList
+            data={this.state.movies}
+            renderItem={({item}: {item: MovieItem}) => <Text style={styles.item}>{item.title}</Text>}
+            keyExtractor={({id}, index) => id}
+          />
+      </View>
     );
   }
 }
@@ -43,9 +47,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'stretch',
     justifyContent: 'center',
-  },
-  movies: {
-    
   },
   title_container: {
     backgroundColor: '#332E33',
