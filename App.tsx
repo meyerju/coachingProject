@@ -1,45 +1,43 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, FlatList } from 'react-native';
 
 interface MovieItem {
   title: string;
-  id: number
+  id: string
 } 
 
-export default class App extends React.Component {
-  state= {
-    movies: null
-  }
-
-  componentDidMount(){
-    return fetch('https://facebook.github.io/react-native/movies.json')
+export default function App () {
+  const [state, setState] = useState({movies:null});
+  
+  useEffect(() => {
+    fetch('https://facebook.github.io/react-native/movies.json')
       .then((response) => response.json())
       .then((responseJson) => {
 
-        this.setState({
+        setState({
           movies: responseJson.movies,
         });
       })
       .catch((error) =>{
         console.error(error);
       });
-  }
 
-  render () {
-    return (
-      <View style={styles.container}>
-        <View style={styles.title_container}>
-          <Text style={styles.title}>The best movies</Text>
-        </View>
-      
-          <FlatList
-            data={this.state.movies}
-            renderItem={({item}: {item: MovieItem}) => <Text style={styles.item}>{item.title}</Text>}
-            keyExtractor={({id}, index) => id}
-          />
+    return;
+  });
+  
+  return (
+    <View style={styles.container}>
+      <View style={styles.title_container}>
+        <Text style={styles.title}>The best movies</Text>
       </View>
-    );
-  }
+    
+        <FlatList
+          data={state.movies}
+          renderItem={({item}: {item: MovieItem}) => <Text style={styles.item}>{item.title}</Text>}
+          keyExtractor={({id}) => id}
+        />
+    </View>
+  )
 }
 
 const styles = StyleSheet.create({
