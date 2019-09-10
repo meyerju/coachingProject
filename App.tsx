@@ -29,7 +29,7 @@ export default function App () {
     <View style={styles.container}>
         <View style={styles.title_container}>
           <Text style={styles.title}>The best {count} movies</Text>
-          <Icon name="rocket" size={30} color="#900" />
+            <Icon name="star" size={30} color="white" />
         </View>
     
         <ScrollView style={styles.item_container}>
@@ -48,9 +48,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   title_container: {
+    display: "flex",
+    flexDirection: "row",
     backgroundColor: '#332E33',
     height: 100,
-    justifyContent: "flex-end",
+    justifyContent: "space-between",
+    alignItems: "flex-end",
     paddingBottom: 20,
     padding: 10,
   },
