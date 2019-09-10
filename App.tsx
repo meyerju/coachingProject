@@ -3,11 +3,6 @@ import { StyleSheet, Text, View, FlatList } from 'react-native';
 
 import { fetchMovies } from './services/movies';
 
-export interface MovieItem {
-  title: string;
-  id: string
-} 
-
 export const movieItem = ({item}: {item: MovieItem}) => <Text style={styles.item}>{item.title}</Text>;
 
 export default function App () {
