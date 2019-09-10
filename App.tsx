@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
 
 import { fetchMovies } from './services/movies';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 export interface MovieItem {
   title: string;
@@ -28,6 +29,7 @@ export default function App () {
     <View style={styles.container}>
         <View style={styles.title_container}>
           <Text style={styles.title}>The best {count} movies</Text>
+          <Icon name="rocket" size={30} color="#900" />
         </View>
     
         <ScrollView style={styles.item_container}>
@@ -58,7 +60,6 @@ const styles = StyleSheet.create({
   },
   item_container:{
     flex:1,
-    backgroundColor: 'green'
   },
   item: {
     padding: 10,
