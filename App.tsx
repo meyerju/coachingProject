@@ -24,12 +24,16 @@ export default function App () {
     <View style={styles.container}>
         <View style={styles.title_container}>
           <Text style={styles.title}>The best {count} movies</Text>
-            <Icon name="star" size={30} color="white" />
         </View>
     
-        <ScrollView style={styles.item_container}>
+        <ScrollView style={styles.items_container}>
           {
-            movies && movies.map(movie =>  <Text key={movie.id} style={styles.item}>{movie.title}</Text>)
+            movies && movies.map(movie => 
+              <View key={movie.id} style={styles.item_container}>
+                <Text style={styles.item}>{movie.title}</Text>
+                <Icon name="star" size={30} color="grey" />
+              </View> 
+            )
           }
         </ScrollView>
     </View>
@@ -56,8 +60,15 @@ const styles = StyleSheet.create({
     fontSize: 25,
     color: "white"    
   },
-  item_container:{
+  items_container:{
     flex:1,
+  },
+  item_container:{
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    padding: 10,
   },
   item: {
     padding: 10,
