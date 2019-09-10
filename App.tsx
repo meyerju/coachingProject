@@ -4,11 +4,6 @@ import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import { fetchMovies } from './services/movies';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-export interface MovieItem {
-  title: string;
-  id: string
-} 
-
 export const movieItem = ({item}: {item: MovieItem}) => <Text style={styles.item}>{item.title}</Text>;
 
 export default function App () {
