@@ -1,7 +1,10 @@
 import { fetchMovies } from './movies';
 
+window.fetch = jest.fn().mockImplementation(() => Promise.resolve(
+  { json: () => ({movies: [{title:"Hello"}]})}
+));
+
 test('5 movies are displayed', async () => {
     const movies = await fetchMovies();
-    expect(movies.length).toBe(5);
-    expect(movies[0].title).toBe('Star Wars')
-});  
+    expect(movies).toEqual([{title:'Hello'}]);
+  });  
