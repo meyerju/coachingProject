@@ -23,7 +23,7 @@ export default function App () {
   return (
     <View style={styles.container}>
         <View style={styles.title_container}>
-          <Text style={styles.title}>The best {count} movies</Text>
+          <Text style={styles.title}>The best {count} movieeees</Text>
         </View>
     
         <ScrollView style={styles.items_container}>

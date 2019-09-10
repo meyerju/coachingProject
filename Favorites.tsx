@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
 
-export default function Favori () {
+export default function Favorites () {
 
   return (
     <View style={styles.container}>
-        <Text>Page Favori!</Text>
+        <Text>Page Favoritos!</Text>
     </View>
   )
 }
