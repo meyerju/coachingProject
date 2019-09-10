@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, FlatList } from 'react-native';
 
 import { fetchMovies } from './services/movies';
 
-interface MovieItem {
+export interface MovieItem {
   title: string;
   id: string
 } 
