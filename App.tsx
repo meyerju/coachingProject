@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, FlatList } from 'react-native';
+import { StyleSheet, Text, View, ScrollView } from 'react-native';
 
 import { fetchMovies } from './services/movies';
 
@@ -30,11 +30,11 @@ export default function App () {
           <Text style={styles.title}>The best {count} movies</Text>
         </View>
     
-        <FlatList
-          data={movies}
-          renderItem={movieItem}
-          keyExtractor={({id}) => id}
-        />
+        <ScrollView style={styles.item_container}>
+          {
+            movies && movies.map(movie =>  <Text key={movie.id} style={styles.item}>{movie.title}</Text>)
+          }
+        </ScrollView>
     </View>
   )
 }
@@ -55,6 +55,10 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 25,
     color: "white"    
+  },
+  item_container:{
+    flex:1,
+    backgroundColor: 'green'
   },
   item: {
     padding: 10,
