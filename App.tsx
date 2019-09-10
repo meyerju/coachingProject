@@ -8,11 +8,7 @@ interface MovieItem {
   id: string
 } 
 
-export function movieItem ({item}: {item: MovieItem}) {
-  return ( 
-    <Text style={styles.item}>{item.title}</Text>
-  )
-};
+export const movieItem = ({item}: {item: MovieItem}) => <Text style={styles.item}>{item.title}</Text>;
 
 export default function App () {
   const [movies, setState] = useState(null);
@@ -37,6 +33,7 @@ export default function App () {
         <FlatList
           data={movies}
           renderItem={movieItem}
+          keyExtractor={({id}) => id}
         />
     </View>
   )
