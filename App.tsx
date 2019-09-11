@@ -7,8 +7,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { createAppContainer } from 'react-navigation';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import Favorites from "./Favorites";
-
-export const movieItem = ({item}: {item: MovieItem}) => <Text style={styles.item}>{item.title}</Text>;
+import FavoriteIcon from "./FavoriteIcon";
 
 function App () {
   const [movies, setState] = useState(null);
@@ -32,12 +31,7 @@ function App () {
     
         <ScrollView style={styles.itemsContainer}>
           {
-            movies && movies.map(movie => 
-              <View key={movie.id} style={styles.itemContainer}>
-                <Text style={styles.item}>{movie.title}</Text>
-                <Ionicons name="ios-star-outline" size={32} color="#332E33" />
-              </View> 
-            )
+            movies && movies.map(movie => <FavoriteIcon key={movie.id} title={movie.title}/>)
           }
         </ScrollView>
     </View>
@@ -93,17 +87,5 @@ const styles = StyleSheet.create({
   },
   itemsContainer:{
     flex:1,
-  },
-  itemContainer:{
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    padding: 10,
-  },
-  item: {
-    padding: 10,
-    fontSize: 18,
-    height: 44,
   }
 });
