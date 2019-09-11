@@ -5,10 +5,13 @@ import { fetchMovies } from './services/movies';
 // import Icon from 'react-native-vector-icons/FontAwesome';
 import { Ionicons } from '@expo/vector-icons';
 
+<<<<<<< HEAD
 import { createAppContainer } from 'react-navigation';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import Favorites from "./Favorites";
 
+=======
+>>>>>>> master
 export const movieItem = ({item}: {item: MovieItem}) => <Text style={styles.item}>{item.title}</Text>;
 
 function App () {
