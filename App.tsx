@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
+import { Provider } from 'react-redux';
+import { createAppContainer } from 'react-navigation';
+import { createBottomTabNavigator } from 'react-navigation-tabs';
 
 import { fetchMovies } from './services/movies';
 import { Ionicons } from '@expo/vector-icons';
 
-import { createAppContainer } from 'react-navigation';
-import { createBottomTabNavigator } from 'react-navigation-tabs';
 import Favorites from "./Favorites";
 import FavoriteIcon from "./FavoriteIcon";
+
+import store from './store';
 
 function App () {
   const [movies, setState] = useState(null);
@@ -63,7 +66,17 @@ const TabNavigator = createBottomTabNavigator({
   },
 },{});
 
-export default createAppContainer(TabNavigator);
+const Navigator = createAppContainer(TabNavigator);
+
+export default class Nav extends React.Component{
+  render(){
+    return(
+      <Provider store={store}>
+        <Navigator/>
+      </Provider>
+    )
+  }
+} ;
 
 const styles = StyleSheet.create({
   container: {
