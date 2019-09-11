@@ -2,11 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
 
 import { fetchMovies } from './services/movies';
-import Icon from 'react-native-vector-icons/FontAwesome';
+// import Icon from 'react-native-vector-icons/FontAwesome';
+
+import { createAppContainer } from 'react-navigation';
+import { createBottomTabNavigator } from 'react-navigation-tabs';
 
 export const movieItem = ({item}: {item: MovieItem}) => <Text style={styles.item}>{item.title}</Text>;
 
-export default function App () {
+function App () {
   const [movies, setState] = useState(null);
   const [count, setCount] = useState(0);
   
@@ -31,7 +34,7 @@ export default function App () {
             movies && movies.map(movie => 
               <View key={movie.id} style={styles.item_container}>
                 <Text style={styles.item}>{movie.title}</Text>
-                <Icon name="star" size={30} color="grey" />
+                {/* <Icon name="star" size={30} color="grey" /> */}
               </View> 
             )
           }
@@ -39,6 +42,13 @@ export default function App () {
     </View>
   )
 }
+
+const TabNavigator = createBottomTabNavigator({
+  app: App,
+  test: App,
+}, {});
+
+export default createAppContainer(TabNavigator);
 
 const styles = StyleSheet.create({
   container: {
