@@ -2,16 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
 
 import { fetchMovies } from './services/movies';
-// import Icon from 'react-native-vector-icons/FontAwesome';
 import { Ionicons } from '@expo/vector-icons';
 
-<<<<<<< HEAD
 import { createAppContainer } from 'react-navigation';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import Favorites from "./Favorites";
 
-=======
->>>>>>> master
 export const movieItem = ({item}: {item: MovieItem}) => <Text style={styles.item}>{item.title}</Text>;
 
 function App () {
@@ -30,14 +26,14 @@ function App () {
 
   return (
     <View style={styles.container}>
-        <View style={styles.title_container}>
+        <View style={styles.titleContainer}>
           <Text style={styles.title}>The best {count} movies</Text>
         </View>
     
-        <ScrollView style={styles.items_container}>
+        <ScrollView style={styles.itemsContainer}>
           {
             movies && movies.map(movie => 
-              <View key={movie.id} style={styles.item_container}>
+              <View key={movie.id} style={styles.itemContainer}>
                 <Text style={styles.item}>{movie.title}</Text>
                 <Ionicons name="ios-star-outline" size={32} color="#332E33" />
               </View> 
@@ -81,7 +77,7 @@ const styles = StyleSheet.create({
     alignItems: 'stretch',
     justifyContent: 'center',
   },
-  title_container: {
+  titleContainer: {
     display: "flex",
     flexDirection: "row",
     backgroundColor: '#332E33',
@@ -95,10 +91,10 @@ const styles = StyleSheet.create({
     fontSize: 25,
     color: "white"    
   },
-  items_container:{
+  itemsContainer:{
     flex:1,
   },
-  item_container:{
+  itemContainer:{
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",

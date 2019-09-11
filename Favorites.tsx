@@ -5,12 +5,12 @@ export default function Favorites () {
 
   return (
     <View style={styles.container}>
-    <View style={styles.title_container}>
+    <View style={styles.titleContainer}>
       <Text style={styles.title}>Favorites movies</Text>
     </View>
 
-    <ScrollView style={styles.items_container}>
-      <View style={styles.item_container}>
+    <ScrollView style={styles.itemsContainer}>
+      <View style={styles.itemContainer}>
         <Text style={styles.item}>Favorites ...</Text>
       </View>             
     </ScrollView>
@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
     alignItems: 'stretch',
     justifyContent: 'center',
   },
-  title_container: {
+  titleContainer: {
     display: "flex",
     flexDirection: "row",
     backgroundColor: '#332E33',
@@ -38,10 +38,10 @@ const styles = StyleSheet.create({
     fontSize: 25,
     color: "white"    
   },
-  items_container:{
+  itemsContainer:{
     flex:1,
   },
-  item_container:{
+  itemContainer:{
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
