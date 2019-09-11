@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, FlatList } from 'react-native';
+import { StyleSheet, Text, View, ScrollView } from 'react-native';
 
 import { fetchMovies } from './services/movies';
+import { Ionicons } from '@expo/vector-icons';
+
+import { createAppContainer } from 'react-navigation';
+import { createBottomTabNavigator } from 'react-navigation-tabs';
+import Favorites from "./Favorites";
 
 export const movieItem = ({item}: {item: MovieItem}) => <Text style={styles.item}>{item.title}</Text>;
 
-export default function App () {
+function App () {
   const [movies, setState] = useState(null);
   const [count, setCount] = useState(0);
   
@@ -21,18 +26,50 @@ export default function App () {
 
   return (
     <View style={styles.container}>
-        <View style={styles.title_container}>
+        <View style={styles.titleContainer}>
           <Text style={styles.title}>The best {count} movies</Text>
         </View>
     
-        <FlatList
-          data={movies}
-          renderItem={movieItem}
-          keyExtractor={({id}) => id}
-        />
+        <ScrollView style={styles.itemsContainer}>
+          {
+            movies && movies.map(movie => 
+              <View key={movie.id} style={styles.itemContainer}>
+                <Text style={styles.item}>{movie.title}</Text>
+                <Ionicons name="ios-star-outline" size={32} color="#332E33" />
+              </View> 
+            )
+          }
+        </ScrollView>
     </View>
   )
 }
+
+const TabNavigator = createBottomTabNavigator({
+  home:{
+    screen: App,
+    navigationOptions: {
+      tabBarLabel:() => {},  
+      tabBarIcon: ({ focused }) => {
+            const colorIcon = focused ? '#0FD791':'#332E33';
+            const iconName = 'ios-home';
+            return <Ionicons name={iconName} size={40} color={colorIcon} />;
+        },
+    },
+  },
+  favorites:{
+    screen: Favorites,
+    navigationOptions: {
+      tabBarIcon: ({ focused }) => {
+        const colorIcon = focused ? '#0FD791':'#332E33';
+        const iconName = 'ios-star';
+        return <Ionicons name={iconName} size={40} color={colorIcon} />;
+    },
+      tabBarLabel:() => {},  
+    },
+  },
+},{});
+
+export default createAppContainer(TabNavigator);
 
 const styles = StyleSheet.create({
   container: {
@@ -40,16 +77,29 @@ const styles = StyleSheet.create({
     alignItems: 'stretch',
     justifyContent: 'center',
   },
-  title_container: {
+  titleContainer: {
+    display: "flex",
+    flexDirection: "row",
     backgroundColor: '#332E33',
     height: 100,
-    justifyContent: "flex-end",
+    justifyContent: "space-between",
+    alignItems: "flex-end",
     paddingBottom: 20,
     padding: 10,
   },
   title: {
     fontSize: 25,
     color: "white"    
+  },
+  itemsContainer:{
+    flex:1,
+  },
+  itemContainer:{
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    padding: 10,
   },
   item: {
     padding: 10,
