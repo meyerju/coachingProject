@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import { fetchMovies } from './services/movies';
 import FavoriteIcon from "./FavoriteIcon";
+import { chooseFavorite } from './action';
 
 export default function App () {
     const [movies, setState] = useState(null);
