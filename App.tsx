@@ -3,9 +3,11 @@ import { StyleSheet, Text, View, ScrollView } from 'react-native';
 
 import { fetchMovies } from './services/movies';
 // import Icon from 'react-native-vector-icons/FontAwesome';
+import { Ionicons } from '@expo/vector-icons';
 
 import { createAppContainer } from 'react-navigation';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
+import Favorites from "./Favorites";
 
 export const movieItem = ({item}: {item: MovieItem}) => <Text style={styles.item}>{item.title}</Text>;
 
@@ -26,7 +28,7 @@ function App () {
   return (
     <View style={styles.container}>
         <View style={styles.title_container}>
-          <Text style={styles.title}>The best {count} movieeees</Text>
+          <Text style={styles.title}>The best {count} movies</Text>
         </View>
     
         <ScrollView style={styles.items_container}>
@@ -34,7 +36,7 @@ function App () {
             movies && movies.map(movie => 
               <View key={movie.id} style={styles.item_container}>
                 <Text style={styles.item}>{movie.title}</Text>
-                {/* <Icon name="star" size={30} color="grey" /> */}
+                <Ionicons name="md-star-outline" size={32} color="#332E33" />
               </View> 
             )
           }
@@ -44,9 +46,9 @@ function App () {
 }
 
 const TabNavigator = createBottomTabNavigator({
-  app: App,
-  test: App,
-}, {});
+  home: App,
+  favorites: Favorites,
+},{});
 
 export default createAppContainer(TabNavigator);
 
