@@ -36,7 +36,8 @@ const TabNavigator = createBottomTabNavigator({
   },
 },{});
 
-const Navigator = createAppContainer(TabNavigator);
+//@ts-ignore
+const Navigator = createAppContainer(test);
 
 export default class Nav extends React.Component{
   render(){
