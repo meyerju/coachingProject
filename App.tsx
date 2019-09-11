@@ -36,7 +36,7 @@ function App () {
             movies && movies.map(movie => 
               <View key={movie.id} style={styles.item_container}>
                 <Text style={styles.item}>{movie.title}</Text>
-                <Ionicons name="md-star-outline" size={32} color="#332E33" />
+                <Ionicons name="ios-star-outline" size={32} color="#332E33" />
               </View> 
             )
           }
@@ -46,8 +46,28 @@ function App () {
 }
 
 const TabNavigator = createBottomTabNavigator({
-  home: App,
-  favorites: Favorites,
+  home:{
+    screen: App,
+    navigationOptions: {
+      tabBarLabel:() => {},  
+      tabBarIcon: ({ focused }) => {
+            const colorIcon = focused ? '#0FD791':'#332E33';
+            const iconName = 'ios-home';
+            return <Ionicons name={iconName} size={40} color={colorIcon} />;
+        },
+    },
+  },
+  favorites:{
+    screen: Favorites,
+    navigationOptions: {
+      tabBarIcon: ({ focused }) => {
+        const colorIcon = focused ? '#0FD791':'#332E33';
+        const iconName = 'ios-star';
+        return <Ionicons name={iconName} size={40} color={colorIcon} />;
+    },
+      tabBarLabel:() => {},  
+    },
+  },
 },{});
 
 export default createAppContainer(TabNavigator);
