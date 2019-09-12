@@ -7,9 +7,7 @@ interface Props {
   movies: MovieItem[]
 }
 
-function Favorites (props: Props) {
-  console.log(props.movies);
-
+function FavoritesComponent (props: Props) {
   return (
     <View style={styles.container}>
       <View style={styles.titleContainer}>
@@ -18,7 +16,7 @@ function Favorites (props: Props) {
 
       <ScrollView style={styles.itemsContainer}>
       {
-         props.movies && props.movies.map(movie => 
+         props.movies && props.movies.map((movie:MovieItem) => 
           <View key={movie.id} style={styles.itemContainer}>
               <Text style={[styles.item]}>{movie.title}</Text>
               <Ionicons name={'ios-star'} size={45} color={'#0FD791'} />
@@ -35,7 +33,7 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps)(Favorites);
+export const Favorites = connect(mapStateToProps)(FavoritesComponent);
 
 const styles = StyleSheet.create({
   container: {

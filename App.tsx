@@ -1,15 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, ScrollView } from 'react-native';
+import React from 'react';
 import { Provider } from 'react-redux';
 import { createAppContainer } from 'react-navigation';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 
 import { Ionicons } from '@expo/vector-icons';
 
-import Favorites from "./Favorites";
-import Home from "./Home";
+import { Favorites } from "./Favorites";
+import { Home } from "./Home";
 
-import store from './store';
+import { store } from './store';
 
 const TabNavigator = createBottomTabNavigator({
   home:{

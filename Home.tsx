@@ -3,20 +3,21 @@ import { connect } from 'react-redux';
 import { Action } from 'redux';
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import { fetchMovies } from './services/movies';
-import FavoriteIcon from "./FavoriteIcon";
+import { FavoriteIcon } from "./FavoriteIcon";
 import { chooseFavorite } from './action';
 
 interface Props {
-  onChooseFavorite(eltId: number): Promise<Action>
+  onChooseFavorite(movie: MovieItem): Promise<Action>
 }
 
-function App (props: Props) {
-    const [movies, setState] = useState(null);
+function HomeComponent (props: Props) {
+    const [movies, setMovies] = useState(null);
     const [count, setCount] = useState(0);
+    const selectMovie = (movie: MovieItem) => () => {props.onChooseFavorite(movie)}
     
     async function fetchData(){
       const movies = await fetchMovies();
-      setState(movies);
+      setMovies(movies);
       setCount(movies.length);
     }
   
@@ -32,20 +33,16 @@ function App (props: Props) {
       
           <ScrollView style={styles.itemsContainer}>
             {
-              movies && movies.map(movie => <FavoriteIcon key={movie.id} select={() => props.onChooseFavorite(movie)} title={movie.title}/>)
+              movies && movies.map((movie: MovieItem) => <FavoriteIcon key={movie.id} select={selectMovie(movie)} title={movie.title}/>)
             }
           </ScrollView>
       </View>
     )
   }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    onChooseFavorite: (elt: MovieItem) => { dispatch(chooseFavorite(elt))}
-  }
-}
+const mapDispatchToProps = {onChooseFavorite : chooseFavorite};
 
-export default connect(null, mapDispatchToProps)(App);
+export const Home = connect(null, mapDispatchToProps)(HomeComponent);
 
 const styles = StyleSheet.create({
     container: {

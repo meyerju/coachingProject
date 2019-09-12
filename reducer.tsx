@@ -9,11 +9,11 @@ const initialState = {
 };
 
 const chooseFavorite = (state: State, action: AnyAction) => {
-    const elt = action.elt;
-    const id = state.favoriteMovies.indexOf(elt);
+    const movie = action.movie;
+    const id = state.favoriteMovies.indexOf(movie);
     let newFavoriteMovies = state.favoriteMovies.slice();
     if(id === -1){
-        newFavoriteMovies.push(elt);
+        newFavoriteMovies.push(movie);
         return newFavoriteMovies;
     }
     newFavoriteMovies.splice(id, 1);
