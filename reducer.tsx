@@ -1,7 +1,7 @@
 import { combineReducers, Action, AnyAction } from "redux";
 
 interface State {
-    favoriteMovies: string[]
+    favoriteMovies: MovieItem[]
 }
 
 const initialState = {
@@ -9,11 +9,11 @@ const initialState = {
 };
 
 const chooseFavorite = (state: State, action: AnyAction) => {
-    const eltId = action.eltId;
-    const id = state.favoriteMovies.indexOf(eltId);
+    const elt = action.elt;
+    const id = state.favoriteMovies.indexOf(elt);
     let newFavoriteMovies = state.favoriteMovies.slice();
     if(id === -1){
-        newFavoriteMovies.push(eltId);
+        newFavoriteMovies.push(elt);
         return newFavoriteMovies;
     }
     newFavoriteMovies.splice(id, 1);
@@ -28,5 +28,5 @@ const reducer = ( state = initialState, action ) => {
 };
 
 export default combineReducers({
-    reducer
+    red: reducer
 });

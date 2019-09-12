@@ -1,4 +1,4 @@
-export const chooseFavorite = (eltId: number) => ({
+export const chooseFavorite = (elt: MovieItem) => ({
     type: "CHOOSE_FAVORITE",
-    eltId: eltId
+    elt: elt
 })

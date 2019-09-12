@@ -32,7 +32,7 @@ function App (props: Props) {
       
           <ScrollView style={styles.itemsContainer}>
             {
-              movies && movies.map(movie => <FavoriteIcon key={movie.id} select={() => props.onChooseFavorite(movie.id)} title={movie.title}/>)
+              movies && movies.map(movie => <FavoriteIcon key={movie.id} select={() => props.onChooseFavorite(movie)} title={movie.title}/>)
             }
           </ScrollView>
       </View>
@@ -41,7 +41,7 @@ function App (props: Props) {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onChooseFavorite: (eltId: number) => { dispatch(chooseFavorite(eltId))}
+    onChooseFavorite: (elt: MovieItem) => { dispatch(chooseFavorite(elt))}
   }
 }
 
