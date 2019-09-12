@@ -11,7 +11,7 @@ function FavoritesComponent (props: Props) {
   return (
     <View style={styles.container}>
       <View style={styles.titleContainer}>
-        <Text style={styles.title}>Favorites movies</Text>
+        <Text style={styles.title}>Favorite movies ({props.movies.length})</Text>
       </View>
 
       <ScrollView style={styles.itemsContainer}>
