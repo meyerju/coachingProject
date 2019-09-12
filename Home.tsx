@@ -1,10 +1,16 @@
 import React, { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
+import { Action } from 'redux';
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import { fetchMovies } from './services/movies';
 import FavoriteIcon from "./FavoriteIcon";
 import { chooseFavorite } from './action';
 
-export default function App () {
+interface Props {
+  onChooseFavorite(eltId: number): Promise<Action>
+}
+
+function App (props: Props) {
     const [movies, setState] = useState(null);
     const [count, setCount] = useState(0);
     
@@ -26,12 +32,20 @@ export default function App () {
       
           <ScrollView style={styles.itemsContainer}>
             {
-              movies && movies.map(movie => <FavoriteIcon key={movie.id} title={movie.title}/>)
+              movies && movies.map(movie => <FavoriteIcon key={movie.id} select={() => props.onChooseFavorite(movie.id)} title={movie.title}/>)
             }
           </ScrollView>
       </View>
     )
   }
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onChooseFavorite: (eltId: number) => { dispatch(chooseFavorite(eltId))}
+  }
+}
+
+export default connect(null, mapDispatchToProps)(App);
 
 const styles = StyleSheet.create({
     container: {

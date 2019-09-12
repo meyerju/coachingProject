@@ -3,7 +3,8 @@ import { StyleSheet, Text, View, Animated } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 interface Props {
-  title: string
+  title: string,
+  select(): void
 }
 
 export default class FavoriteIcon extends React.Component<Props> {
@@ -21,6 +22,7 @@ export default class FavoriteIcon extends React.Component<Props> {
         duration: 50 
       },
     ).start(); 
+    this.props.select();
     this.setState({isFavorite: !this.state.isFavorite})
   }
 
