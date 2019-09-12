@@ -1,52 +1,18 @@
-import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, ScrollView } from 'react-native';
-
-import { fetchMovies } from './services/movies';
-import { Ionicons } from '@expo/vector-icons';
-
+import React from 'react';
+import { Provider } from 'react-redux';
 import { createAppContainer } from 'react-navigation';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
-import Favorites from "./Favorites";
 
-export const movieItem = ({item}: {item: MovieItem}) => <Text style={styles.item}>{item.title}</Text>;
+import { Ionicons } from '@expo/vector-icons';
 
-function App () {
-  const [movies, setState] = useState(null);
-  const [count, setCount] = useState(0);
-  
-  async function fetchData(){
-    const movies = await fetchMovies();
-    setState(movies);
-    setCount(movies.length);
-  }
+import { Favorites } from "./Favorites";
+import { Home } from "./Home";
 
-  useEffect(() => {
-     fetchData();
-  }, []);
-
-  return (
-    <View style={styles.container}>
-        <View style={styles.titleContainer}>
-          <Text style={styles.title}>The best {count} movies</Text>
-        </View>
-    
-        <ScrollView style={styles.itemsContainer}>
-          {
-            movies && movies.map(movie => 
-              <View key={movie.id} style={styles.itemContainer}>
-                <Text style={styles.item}>{movie.title}</Text>
-                <Ionicons name="ios-star-outline" size={32} color="#332E33" />
-              </View> 
-            )
-          }
-        </ScrollView>
-    </View>
-  )
-}
+import { store } from './store';
 
 const TabNavigator = createBottomTabNavigator({
   home:{
-    screen: App,
+    screen: Home,
     navigationOptions: {
       tabBarLabel:() => {},  
       tabBarIcon: ({ focused }) => {
@@ -69,41 +35,15 @@ const TabNavigator = createBottomTabNavigator({
   },
 },{});
 
-export default createAppContainer(TabNavigator);
+//@ts-ignore
+const Navigator = createAppContainer(TabNavigator);
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'stretch',
-    justifyContent: 'center',
-  },
-  titleContainer: {
-    display: "flex",
-    flexDirection: "row",
-    backgroundColor: '#332E33',
-    height: 100,
-    justifyContent: "space-between",
-    alignItems: "flex-end",
-    paddingBottom: 20,
-    padding: 10,
-  },
-  title: {
-    fontSize: 25,
-    color: "white"    
-  },
-  itemsContainer:{
-    flex:1,
-  },
-  itemContainer:{
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    padding: 10,
-  },
-  item: {
-    padding: 10,
-    fontSize: 18,
-    height: 44,
+export default class Nav extends React.Component{
+  render(){
+    return(
+      <Provider store={store}>
+        <Navigator/>
+      </Provider>
+    )
   }
-});
+} ;

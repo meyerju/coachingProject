@@ -1,22 +1,39 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { connect } from 'react-redux';
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 
-export default function Favorites () {
+interface Props {
+  movies: MovieItem[]
+}
 
+function FavoritesComponent (props: Props) {
   return (
     <View style={styles.container}>
-    <View style={styles.titleContainer}>
-      <Text style={styles.title}>Favorites movies</Text>
-    </View>
+      <View style={styles.titleContainer}>
+        <Text style={styles.title}>Favorite movies ({props.movies.length})</Text>
+      </View>
 
-    <ScrollView style={styles.itemsContainer}>
-      <View style={styles.itemContainer}>
-        <Text style={styles.item}>Favorites ...</Text>
-      </View>             
-    </ScrollView>
-</View>
+      <ScrollView style={styles.itemsContainer}>
+      {
+         props.movies && props.movies.map((movie:MovieItem) => 
+          <View key={movie.id} style={styles.itemContainer}>
+              <Text style={[styles.item]}>{movie.title}</Text>
+              <Ionicons name={'ios-star'} size={45} color={'#0FD791'} />
+          </View>)
+        }
+      </ScrollView>
+  </View>
   )
 }
+
+const mapStateToProps = state => {
+  return{
+    movies: state.red.favoriteMovies
+  }
+}
+
+export const Favorites = connect(mapStateToProps)(FavoritesComponent);
 
 const styles = StyleSheet.create({
   container: {

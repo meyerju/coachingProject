@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "@types/jest": "^24.0.18",
+    "commitizen": "^4.0.3",
+    "cz-conventional-changelog": "3.0.2",
     "expo": "^34.0.1",
     "node-fetch": "^2.6.0",
     "react": "16.8.3",
@@ -21,6 +23,8 @@
     "react-native-web": "^0.11.4",
     "react-navigation": "^4.0.2",
     "react-navigation-tabs": "^2.4.1",
+    "react-redux": "^7.1.1",
+    "redux": "^4.0.4",
     "ts-jest": "^24.0.2"
   },
   "devDependencies": {
@@ -48,5 +52,10 @@
       "json"
     ]
   },
-  "private": true
+  "private": true,
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
 }
