@@ -33,7 +33,7 @@ function HomeComponent (props: Props) {
       
           <ScrollView style={styles.itemsContainer}>
             {
-              movies && movies.map((movie: MovieItem) => <FavoriteIcon key={movie.id} select={selectMovie(movie)} title={movie.title}/>)
+              movies && movies.map((movie: MovieItem) => <FavoriteIcon key={movie._id} select={selectMovie(movie)} title={movie.title}/>)
             }
           </ScrollView>
       </View>

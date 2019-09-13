@@ -1,8 +1,8 @@
 export const fetchMovies = () => {
-    return fetch('https://facebook.github.io/react-native/movies.json')
+    return fetch('http://localhost:3001/')
       .then((response) => {return response.json()})
       .then((responseJson) => {
-        return responseJson.movies;
+        return responseJson;
       })
       .catch((error) =>{
         console.error(error);

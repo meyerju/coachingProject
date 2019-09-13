@@ -17,7 +17,7 @@ function FavoritesComponent (props: Props) {
       <ScrollView style={styles.itemsContainer}>
       {
          props.movies && props.movies.map((movie:MovieItem) => 
-          <View key={movie.id} style={styles.itemContainer}>
+          <View key={movie._id} style={styles.itemContainer}>
               <Text style={[styles.item]}>{movie.title}</Text>
               <Ionicons name={'ios-star'} size={45} color={'#0FD791'} />
           </View>)
